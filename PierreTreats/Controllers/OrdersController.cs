@@ -26,7 +26,7 @@ namespace PierreTreats.Controllers
     [Authorize]
     public async Task<ActionResult> Index() 
     {
-      // System.Console.WriteLine("test"); 
+     
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
       var userOrders = _db.Orders.Where(entry => entry.User.Id == currentUser.Id)
@@ -36,23 +36,15 @@ namespace PierreTreats.Controllers
       
       return View(userOrders);
     }
-    // public async Task<ActionResult> CheckOutBooks() 
-    // {
-    //   // System.Console.WriteLine("test"); 
-    //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    //   var currentUser = await _userManager.FindByIdAsync(userId);
-    //   var userCheckouts = _db.Checkouts.Where(entry => entry.PatronId == currentUser.Id).ToList();
-      
-    //   return View(userCheckouts);
-    // }
+  
     [Authorize]
     public async Task<ActionResult> Create(int id) //id book
     {
-      // System.Console.WriteLine("test"); 
+     
       
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      // var userCheckouts = _db.Checkouts.Where(entry => entry.PatronId == currentUser.Id).ToList();
+     
       var treatsInStock = _db.Stock.Where(x => x.TreatId == id).Where(x => x.InStock == true).ToList();
       if(treatsInStock.Count != 0)
       {

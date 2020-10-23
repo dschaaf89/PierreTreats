@@ -7,10 +7,8 @@
 
 @using (Html.BeginForm())
 {
- // @Html.HiddenFor(model => model.BookId)
   <table>
     <tr>
-          @* @Html.HiddenFor( x => x.InStock = true) *@
       <td>@Html.Label("Select Treat")</td>
       <td>@Html.DropDownList("TreatId")</td>
     </tr>

@@ -78,7 +78,7 @@ namespace PierreTreats.Controllers
     [Authorize(Policy = "RequireAdministratorRole")]
     [HttpPost]
     public ActionResult AddFlavor(Treat treat, int FlavorId)
-    {
+   {
         if (FlavorId != 0)
         {
         _db.TreatFlavors.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
@@ -121,7 +121,7 @@ namespace PierreTreats.Controllers
       
         if (stock.TreatId != 0)
         {
-          stock.InStock = true;
+        stock.InStock = true;
         _db.Stock.Add(stock);
         }
         _db.SaveChanges();

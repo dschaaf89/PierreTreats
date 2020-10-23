@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PierreTreats.Models;
 
 namespace PierreTreats.Migrations
 {
     [DbContext(typeof(PierreTreatsContext))]
-    partial class PierreTreatsContextModelSnapshot : ModelSnapshot
+    [Migration("20201023205431_StockOrderTables")]
+    partial class StockOrderTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,7 +314,7 @@ namespace PierreTreats.Migrations
 
             modelBuilder.Entity("PierreTreats.Models.Order", b =>
                 {
-                    b.HasOne("PierreTreats.Models.Stock", "Stock")
+                    b.HasOne("PierreTreats.Models.Stock")
                         .WithMany("Order")
                         .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade);

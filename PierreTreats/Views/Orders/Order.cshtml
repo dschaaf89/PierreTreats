@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+@using PierreTreats.Models
+@model PierreTreats.Models.Order
+
+<h2>Order a Treat</h2>
+
+
+
+@using (Html.BeginForm())
+{
+  <table>
+    <tr>
+      <td>@Html.Label("Select Treat")</td>
+      <td>@Html.DropDownList("TreatId")</td>
+    </tr>
+  </table>
+  
+  <button type="submit" class="btn btn-info fa "><i class="fa-user-plus"> Order Treat</i></button>
+}

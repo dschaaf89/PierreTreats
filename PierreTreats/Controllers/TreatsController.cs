@@ -62,14 +62,16 @@ namespace PierreTreats.Controllers
         var thisTreat = _db.Treats
         .Include(treat => treat.TreatFlavor)
         .ThenInclude(join => join.Flavor)
+        .Include(book => book.Stock)
         .FirstOrDefault(treat => treat.TreatId == id); 
+        ViewBag.InStockTreats = _db.Stock.Where(x => x.TreatId == id).Where(x => x.InStock == true).ToList();
         return View(thisTreat);
     }
     [Authorize(Policy = "RequireAdministratorRole")]
     public ActionResult AddFlavor(int id)
     {
         var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-        ViewBag.AuthorId = new SelectList(_db.Flavors, "FlavorId", "FlavorType");
+        ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorType");
         return View(thisTreat);
     }
 
@@ -103,6 +105,27 @@ namespace PierreTreats.Controllers
       _db.Entry(treat).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+       [Authorize(Policy = "RequireAdministratorRole")]
+    public ActionResult AddStock(int id)
+    {
+        var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+        ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+        return View(thisTreat);
+    }
+    
+    [Authorize(Policy = "RequireAdministratorRole")]
+    [HttpPost]
+    public ActionResult AddCopy(Stock stock)
+    {
+      
+        if (stock.TreatId != 0)
+        {
+          stock.InStock = true;
+        _db.Stock.Add(stock);
+        }
+        _db.SaveChanges();
+        return RedirectToAction("Index");
     }
 
 

@@ -25,5 +25,14 @@ else
     }
   </ul>
 }
+</ul>
+  <h4>Number of Treats: @Model.Stock.Count</h4>
+  <h4>@Model.Name in stock: @ViewBag.InStockTreats.Count</h4>
+  <br>
+  @if(@ViewBag.InStockTreats.Count != 0)
+  {
+    @Html.ActionLink("Order", "Create","Orders", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
+  }
 
+@Html.ActionLink("AddFlavor", "AddFlavor", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
 @Html.ActionLink("Delete", "Delete", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })

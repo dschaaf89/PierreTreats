@@ -79,7 +79,7 @@ namespace PierreTreats.Controllers
 
     //[Authorize(Policy = "RequireAdministratorRole")]
     [HttpPost]
-    public ActionResult AddAuthor(Flavor flavor, int TreatId)
+    public ActionResult AddTreat(Flavor flavor, int TreatId)
     {
         if (TreatId != 0)
         {

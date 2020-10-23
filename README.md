@@ -69,6 +69,7 @@ This Project was to show Authorizations and many to many Database relationships.
 ## Known Bugs
 
 Cant add flavor thru Treat right now
+also user cant delete order
 
 ## Technologies Used
 

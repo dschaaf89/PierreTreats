@@ -6,7 +6,7 @@
 
 ## Description
 
-This Project was to show Authorizations and many to many Database relationships. Pierre Came back for his third webpage redesign so he can show off his new buisness entitiy inside of his Bakery buisness. 
+This Project was to show Authorizations and many to many Database relationships. Pierre Came back for his third webpage redesign so he can show off his new business entity inside of his Bakery business. 
 
 
 ###Brainstorming

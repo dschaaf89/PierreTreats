@@ -28,7 +28,7 @@ namespace PierreTreats.Controllers
       return View(model);
     }
 
-    [Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize (Policy = "RequireAdministratorRole")]
       public ActionResult Create()
     {
       return View();

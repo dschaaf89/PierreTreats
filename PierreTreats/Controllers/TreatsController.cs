@@ -24,7 +24,7 @@ namespace PierreTreats.Controllers
       List<Treat> model = _db.Treats.OrderBy(x => x.Name).ToList();
       return View(model);
     }
-    [Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize (Policy = "RequireAdministratorRole")]
       public ActionResult Create()
     {
       return View();
@@ -67,25 +67,8 @@ namespace PierreTreats.Controllers
         ViewBag.InStockTreats = _db.Stock.Where(x => x.TreatId == id).Where(x => x.InStock == true).ToList();
         return View(thisTreat);
     }
-    [Authorize(Policy = "RequireAdministratorRole")]
-    public ActionResult AddFlavor(int id)
-    {
-        var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-        ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorType");
-        return View(thisTreat);
-    }
+    
 
-    [Authorize(Policy = "RequireAdministratorRole")]
-    [HttpPost]
-    public ActionResult AddFlavor(Treat treat, int FlavorId)
-   {
-        if (FlavorId != 0)
-        {
-        _db.TreatFlavors.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
-        }
-        _db.SaveChanges();
-        return RedirectToAction("Index");
-    }
     [Authorize(Policy = "RequireAdministratorRole")]
     public ActionResult Edit(int id)
     {
@@ -116,7 +99,7 @@ namespace PierreTreats.Controllers
     
     [Authorize(Policy = "RequireAdministratorRole")]
     [HttpPost]
-    public ActionResult AddCopy(Stock stock)
+    public ActionResult AddStock(Stock stock)
     {
       
         if (stock.TreatId != 0)
@@ -127,6 +110,25 @@ namespace PierreTreats.Controllers
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
+
+     [Authorize(Policy = "RequireAdministratorRole")]
+    public ActionResult AddFlavor(int id)
+    {
+        var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+        ViewBag.FlavorId = new SelectList(_db.Flavors,"FlavorId","FlavorType");
+        return View(thisTreat);
+    }
+     [Authorize(Policy = "RequireAdministratorRole")]
+     [HttpPost]
+     public ActionResult AddFlavor (Treat treat, int FlavorId)
+     {
+     if(FlavorId !=0)
+     {
+         _db.TreatFlavors.Add(new TreatFlavor(){ FlavorId = FlavorId, TreatId = treat.TreatId});
+     }
+    _db.SaveChanges();
+    return RedirectToAction("Index"); 
+     }
 
 
     }

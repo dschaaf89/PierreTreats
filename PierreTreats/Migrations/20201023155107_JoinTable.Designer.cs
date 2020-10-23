@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PierreTreats.Models;
 
 namespace PierreTreats.Migrations
 {
     [DbContext(typeof(PierreTreatsContext))]
-    partial class PierreTreatsContextModelSnapshot : ModelSnapshot
+    [Migration("20201023155107_JoinTable")]
+    partial class JoinTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,11 +183,7 @@ namespace PierreTreats.Migrations
 
                     b.Property<string>("FlavorType");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("FlavorId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Flavors");
                 });
@@ -197,11 +195,7 @@ namespace PierreTreats.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("TreatId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Treats");
                 });
@@ -271,20 +265,6 @@ namespace PierreTreats.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PierreTreats.Models.Flavor", b =>
-                {
-                    b.HasOne("PierreTreats.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("PierreTreats.Models.Treat", b =>
-                {
-                    b.HasOne("PierreTreats.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("PierreTreats.Models.TreatFlavor", b =>

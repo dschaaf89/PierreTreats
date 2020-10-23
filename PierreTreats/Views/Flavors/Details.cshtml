@@ -25,5 +25,5 @@ else
     }
   </ul>
 }
-
+@Html.ActionLink("AddTreat", "AddTreat", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })
 @Html.ActionLink("Delete", "Delete", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })

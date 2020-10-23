@@ -23,7 +23,7 @@ namespace PierreTreats.Controllers
       _db = db;
     }
 
-    
+    [Authorize]
     public async Task<ActionResult> Index() 
     {
       // System.Console.WriteLine("test"); 
@@ -45,8 +45,8 @@ namespace PierreTreats.Controllers
       
     //   return View(userCheckouts);
     // }
-    
-    public async Task<ActionResult> Order(int id) //id book
+    [Authorize]
+    public async Task<ActionResult> Create(int id) //id book
     {
       // System.Console.WriteLine("test"); 
       

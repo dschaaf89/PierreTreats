@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierreTreats.Models.Flavor
+<h2>Flavor Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.FlavorType) : @Html.DisplayFor(model => model.FlavorType)</h3>
+@if(@Model.TreatFlavor.Count == 0)
+{
+  <p>This Flavor Type has no Treats</p>
+}
+else
+{
+  <h4>Treats with they Flavor:</h4>
+  <ul>
+    @foreach(var join in Model.TreatFlavor)
+    {
+      <li>@join.Treat.Name</li>
+       @using (Html.BeginForm("DeleteAuthor", "Book"))
+    {
+      @Html.Hidden("joinId", @join.TreatFlavorId)
+      <input type="submit" value="Delete"/>
+    }
+    }
+  </ul>
+}
+
+@Html.ActionLink("Delete", "Delete", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })

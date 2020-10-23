@@ -41,8 +41,8 @@ namespace PierreTreats
 
       testAdmin = new ApplicationUser
       {
-        UserName = "admin@library.local",
-        Email = "admin@PierreTreates.local"
+        UserName = "admin@PierreTreats.local",
+        Email = "admin@PierreTreats.local"
       };
       await userManager.CreateAsync(
         testAdmin, "NotSecure123!!");

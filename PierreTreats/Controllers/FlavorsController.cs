@@ -28,12 +28,12 @@ namespace PierreTreats.Controllers
       return View(model);
     }
 
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
       public ActionResult Create()
     {
       return View();
     }
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     [HttpPost]
     public async Task<ActionResult> Create(Flavor flavor)
     {
@@ -52,7 +52,7 @@ namespace PierreTreats.Controllers
       return View(thisFlavor);
     }
 
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
@@ -69,7 +69,7 @@ namespace PierreTreats.Controllers
         .FirstOrDefault(flavor => flavor.FlavorId == id); 
         return View(thisFlavor);
     }
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public ActionResult AddTreat(int id)
     {
         var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
@@ -77,7 +77,7 @@ namespace PierreTreats.Controllers
         return View(thisFlavor);
     }
 
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     [HttpPost]
     public ActionResult AddTreat(Flavor flavor, int TreatId)
     {
@@ -88,7 +88,7 @@ namespace PierreTreats.Controllers
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public ActionResult Edit(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
@@ -96,7 +96,7 @@ namespace PierreTreats.Controllers
       return View(thisFlavor);
     }
     
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     [HttpPost]
     public ActionResult Edit(Flavor flavor, int TreatId)
     {

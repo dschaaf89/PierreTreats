@@ -10,16 +10,11 @@
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.Name)
-  <table>
-    <tr>
-      <td>@Html.LabelFor(model => model.Name)</td>
-      <td>@Html.EditorFor(model => model.Name)</td>
-    </tr>
-    <tr>
-      <td>@Html.Label("Select Flavor")</td>
-      <td>@Html.DropDownList("FlavorId")</td>
-    </tr>
-  </table>
+  @Html.HiddenFor(model => model.TreatId)
+  @Html.HiddenFor(model => model.TreatId)
+
+      @Html.LabelFor(model => model.Name)
+      @Html.EditorFor(model => model.Name, new { @required = "required"})
+  
   <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
 }

@@ -5,25 +5,33 @@
 @model PierreTreats.Models.Flavor
 <h2>Flavor Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.FlavorType) : @Html.DisplayFor(model => model.FlavorType)</h3>
-@if(@Model.TreatFlavor.Count == 0)
-{
-  <p>This Flavor Type has no Treats</p>
-}
-else
-{
-  <h4>Treats with they Flavor:</h4>
-  <ul>
-    @foreach(var join in Model.TreatFlavor)
-    {
-      <li>@join.Treat.Name</li>
-       @using (Html.BeginForm("DeleteAuthor", "Book"))
-    {
-      @Html.Hidden("joinId", @join.TreatFlavorId)
-      <input type="submit" value="Delete"/>
-    }
-    }
-  </ul>
-}
-@Html.ActionLink("AddTreat", "AddTreat", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })
-@Html.ActionLink("Delete", "Delete", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })
+<p>@Html.DisplayFor(model => model.FlavorType) | Flavor Details</p>
+<hr />
+<p>Flavor Name: @Html.DisplayFor(model => model.FlavorType)</p>
+
+ @if(Model.TreatFlavor.Count == 0)
+          {
+            <p>@Model.FlavorType has no Treats .</p>
+          }
+          <ul>
+            @foreach (TreatFlavor treatFlavor in @Model.TreatFlavor)
+            {
+              @if(@User.Identity.IsAuthenticated)
+              {
+                <li>@Html.ActionLink(treatFlavor.Treat.Name,"details","Treats", new {id = treatFlavor.FlavorId}) | @Html.ActionLink("Delete","DeleteTreat", new {id = treatFlavor.TreatFlavorId}) </li>
+              }
+              else
+              {
+                <li>@Html.ActionLink(treatFlavor.Treat.Name,"details","treats", new {id = treatFlavor.TreatId}) </li>
+              }
+                
+            }
+          </ul>
+
+           @if(@User.Identity.IsAuthenticated)
+            {
+              @Html.ActionLink("AddTreat", "AddTreat", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })
+              @Html.ActionLink("Delete", "Delete", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })
+            }
+
+

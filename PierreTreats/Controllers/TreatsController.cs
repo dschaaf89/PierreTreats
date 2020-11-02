@@ -130,6 +130,17 @@ namespace PierreTreats.Controllers
     return RedirectToAction("Index"); 
      }
 
+    [Authorize(Policy = "RequireAdministratorRole")]
+    
+    public ActionResult DeleteFlavor(int id)
+    {
+        var joinEntry = _db.TreatFlavors.FirstOrDefault(entry => entry.TreatFlavorId == id);
+        int treatId = joinEntry.TreatId;
+        _db.TreatFlavors.Remove(joinEntry);
+        _db.SaveChanges();
+        return RedirectToAction("Details", "Treats",new {id = treatId});
+    }
+
 
     }
 }

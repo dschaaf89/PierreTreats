@@ -11,11 +11,9 @@
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.FlavorId)
-  <table>
-    <tr>
-      <td>@Html.Label("Select Treat")</td>
-      <td>@Html.DropDownList("TreatId")</td>
-    </tr>
-  </table>
+
+  @Html.LabelFor(model => model.FlavorType)
+  @Html.EditorFor(model => model.FlavorType, new { @required = "required"})
+ 
   <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
 }

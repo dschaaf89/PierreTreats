@@ -48,7 +48,7 @@ This Project was to show Authorizations and many to many Database relationships.
   * Type "dotnet restore" to get bin and obj files
   * Type "dotnet run" in GitBash to run the program
   * Add database per the instructions below.
-  * Make Engineers,Licenses and Machines
+  * Make Treats and flavors.
 
 ### Database Setup
 
@@ -68,7 +68,7 @@ This Project was to show Authorizations and many to many Database relationships.
 
 ## Known Bugs
 
-Cant add flavor thru Treat right now
+
 also user cant delete order
 
 ## Technologies Used

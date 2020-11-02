@@ -6,33 +6,40 @@
 <h2>Treat Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name) : @Html.DisplayFor(model => model.Name)</h3>
-@if(@Model.TreatFlavor.Count == 0)
+@if (Model.TreatFlavor.Count == 0)
 {
-  <p>This Treat Type has no Flavors associated</p>
+  <p>@Model.Name has no Flavors .</p>
 }
-else
-{
-  <h4>Flavors Treat has been associated:</h4>
-  <ul>
-    @foreach(var join in Model.TreatFlavor)
+<ul>
+  @foreach (TreatFlavor treatFlavor in @Model.TreatFlavor)
+  {
+    @if (@User.Identity.IsAuthenticated)
     {
-      <li>@join.Flavor.FlavorType</li>
-       @using (Html.BeginForm("DeleteFlavor", "Treats"))
+     <li>@Html.ActionLink(treatFlavor.Flavor.FlavorType,"details","flavors", new {id = treatFlavor.FlavorId}) | @Html.ActionLink("delete","DeleteFlavor", new {id = treatFlavor.TreatFlavorId}) </li>
+
+    }
+    else
     {
-      @Html.Hidden("joinId", @join.TreatFlavorId)
-      <input type="submit" value="Delete"/>
+      <li>@Html.ActionLink(treatFlavor.Flavor.FlavorType,"Details","Flavors", new {id = treatFlavor.FlavorId})</li>
     }
-    }
-  </ul>
-}
+
+  }
 </ul>
-  <h4>Number of Treats: @Model.Stock.Count</h4>
-  <h4>@Model.Name in stock: @ViewBag.InStockTreats.Count</h4>
+ <h4>@Model.Name in stock: @ViewBag.InStockTreats.Count</h4>
   <br>
   @if(@ViewBag.InStockTreats.Count != 0)
   {
     @Html.ActionLink("Order", "Create","Orders", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
   }
 
-@Html.ActionLink("AddFlavor", "AddFlavor", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
-@Html.ActionLink("Delete", "Delete", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
+
+@if (@User.Identity.IsAuthenticated)
+{
+  <button class="btn btn-info" onclick="window.location.href='/Treats/Edit/@Model.TreatId';">Edit</button>
+  @Html.ActionLink("AddFlavor", "AddFlavor", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
+  @Html.ActionLink("Delete", "Delete", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
+}
+
+
+
+  

@@ -25,11 +25,11 @@ namespace PierreTreats
     {
       services.AddMvc();
 
-      services.AddAuthorization(options =>
-      {
-        options.AddPolicy("RequireAdministratorRole",
-        policy => policy.RequireRole("Administrator"));
-      });
+      // services.AddAuthorization(options =>
+      // {
+      //   options.AddPolicy("RequireAdministratorRole",
+      //   policy => policy.RequireRole("Administrator"));
+      // });
 
       services.AddEntityFrameworkMySql()
         .AddDbContext<PierreTreatsContext>(options => options

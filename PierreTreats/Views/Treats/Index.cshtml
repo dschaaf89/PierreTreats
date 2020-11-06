@@ -3,12 +3,17 @@
 }
 @using PierreTreats.Models;
 @model List<PierreTreats.Models.Treat>;
+@if (@User.Identity.IsAuthenticated)
+{ 
+if(@User.IsInRole("Administrator"))
+{
+  @Html.ActionLink(" Add Treat", "Create", null, null, new { @class="btn btn-info fa fa-user-plus" })
 
-@Html.ActionLink(" Add Treat", "Create", null, null, new { @class="btn btn-info fa fa-user-plus" })
-@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
-@Html.ActionLink(" Add Stock", "AddStock", null, null, new { @class="btn btn-info fa fa-user-plus" })
+  @Html.ActionLink(" Add Stock", "AddStock", null, null, new { @class="btn btn-info fa fa-user-plus" })
+}
 
-
+}
+  @Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
 <h1>Treats:</h1>
 
 @if (@Model.Count == 0)

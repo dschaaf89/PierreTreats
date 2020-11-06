@@ -15,7 +15,7 @@
   {
     @if (@User.Identity.IsAuthenticated)
     {
-     <li>@Html.ActionLink(treatFlavor.Flavor.FlavorType,"details","flavors", new {id = treatFlavor.FlavorId}) | @Html.ActionLink("delete","DeleteFlavor", new {id = treatFlavor.TreatFlavorId}) </li>
+     <li>@Html.ActionLink(treatFlavor.Flavor.FlavorType,"details","flavors", new {id = treatFlavor.FlavorId})</li>
 
     }
     else
@@ -34,10 +34,15 @@
 
 
 @if (@User.Identity.IsAuthenticated)
+  
 {
-  <button class="btn btn-info" onclick="window.location.href='/Treats/Edit/@Model.TreatId';">Edit</button>
+  if(@User.IsInRole("Administrator"))
+  {
+<button class="btn btn-info" onclick="window.location.href='/Treats/Edit/@Model.TreatId';">Edit</button>
   @Html.ActionLink("AddFlavor", "AddFlavor", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
   @Html.ActionLink("Delete", "Delete", new { id = Model.TreatId }, new { @class="btn btn-info fa fa-edit" })
+  }
+  
 }
 
 

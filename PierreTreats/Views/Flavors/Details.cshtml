@@ -9,7 +9,7 @@
 <hr />
 <p>Flavor Name: @Html.DisplayFor(model => model.FlavorType)</p>
 
- @if(Model.TreatFlavor.Count == 0)
+        @if(Model.TreatFlavor.Count == 0)
           {
             <p>@Model.FlavorType has no Treats .</p>
           }
@@ -18,7 +18,7 @@
             {
               @if(@User.Identity.IsAuthenticated)
               {
-                <li>@Html.ActionLink(treatFlavor.Treat.Name,"details","Treats", new {id = treatFlavor.FlavorId}) | @Html.ActionLink("Delete","DeleteTreat", new {id = treatFlavor.TreatFlavorId}) </li>
+                <li>@Html.ActionLink(treatFlavor.Treat.Name,"details","treats", new {id = treatFlavor.TreatId}) </li>
               }
               else
               {
@@ -27,11 +27,20 @@
                 
             }
           </ul>
+          <div>
+            @if(@User.Identity.IsAuthenticated)
+            {
+              if(User.IsInRole("Administrator"))
+              {
+              <button class="btn btn-info" onclick="window.location.href='/flavors/addTreat/@Model.FlavorId';">Add a Treat</button>
+              }
+            }
 
            @if(@User.Identity.IsAuthenticated)
             {
+              if(User.IsInRole("Administrator"))
+              {
               @Html.ActionLink("AddTreat", "AddTreat", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })
               @Html.ActionLink("Delete", "Delete", new { id = Model.FlavorId }, new { @class="btn btn-info fa fa-edit" })
+              }
             }
-
-

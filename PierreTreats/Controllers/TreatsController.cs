@@ -24,12 +24,12 @@ namespace PierreTreats.Controllers
       List<Treat> model = _db.Treats.OrderBy(x => x.Name).ToList();
       return View(model);
     }
-    [Authorize (Policy = "RequireAdministratorRole")]
+     [Authorize (Roles="Administrator")]
       public ActionResult Create()
     {
       return View();
     }
-    [Authorize(Policy = "RequireAdministratorRole")]
+     [Authorize (Roles="Administrator")]
     [HttpPost]
     public async Task<ActionResult> Create(Treat treat)
     {
@@ -41,14 +41,14 @@ namespace PierreTreats.Controllers
       return RedirectToAction("Index");
     }
 
-    [Authorize(Policy = "RequireAdministratorRole")]
+     [Authorize (Roles="Administrator")]
     public ActionResult Delete(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
       return View(thisTreat);
     }
 
-    [Authorize(Policy = "RequireAdministratorRole")]
+     [Authorize (Roles="Administrator")]
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
@@ -69,7 +69,7 @@ namespace PierreTreats.Controllers
     }
     
 
-    [Authorize(Policy = "RequireAdministratorRole")]
+     [Authorize (Roles="Administrator")]
     public ActionResult Edit(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
@@ -77,7 +77,7 @@ namespace PierreTreats.Controllers
       return View(thisTreat);
     }
     
-    [Authorize(Policy = "RequireAdministratorRole")]
+     [Authorize (Roles="Administrator")]
     [HttpPost]
     public ActionResult Edit(Treat treat, int FlavorId)
     {
@@ -89,7 +89,7 @@ namespace PierreTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-       [Authorize(Policy = "RequireAdministratorRole")]
+      [Authorize (Roles="Administrator")]
     public ActionResult AddStock(int id)
     {
         var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
@@ -97,7 +97,7 @@ namespace PierreTreats.Controllers
         return View(thisTreat);
     }
     
-    [Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize (Roles="Administrator")]
     [HttpPost]
     public ActionResult AddStock(Stock stock)
     {
@@ -111,14 +111,14 @@ namespace PierreTreats.Controllers
         return RedirectToAction("Index");
     }
 
-     [Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize (Roles="Administrator")]
     public ActionResult AddFlavor(int id)
     {
         var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
         ViewBag.FlavorId = new SelectList(_db.Flavors,"FlavorId","FlavorType");
         return View(thisTreat);
     }
-     [Authorize(Policy = "RequireAdministratorRole")]
+     [Authorize (Roles="Administrator")]
      [HttpPost]
      public ActionResult AddFlavor (Treat treat, int FlavorId)
      {
@@ -130,8 +130,7 @@ namespace PierreTreats.Controllers
     return RedirectToAction("Index"); 
      }
 
-    [Authorize(Policy = "RequireAdministratorRole")]
-    
+    [Authorize (Roles="Administrator")]
     public ActionResult DeleteFlavor(int id)
     {
         var joinEntry = _db.TreatFlavors.FirstOrDefault(entry => entry.TreatFlavorId == id);
